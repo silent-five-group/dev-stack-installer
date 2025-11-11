@@ -1,0 +1,658 @@
+{
+  "tiers": {
+    "essential": {
+      "name": "Essential",
+      "description": "Core development tools (Git, Docker, Python, Node.js, VS Code, PostgreSQL)",
+      "tools": [
+        {
+          "id": "git",
+          "name": "Git",
+          "description": "Version control system",
+          "check": "git --version",
+          "install": {
+            "windows": "winget install --id Git.Git --silent",
+            "macos": "brew install git",
+            "linux": "sudo apt-get install -y git || sudo dnf install -y git || sudo yum install -y git"
+          }
+        },
+        {
+          "id": "gh",
+          "name": "GitHub CLI",
+          "description": "GitHub command-line tool",
+          "check": "gh --version",
+          "install": {
+            "windows": "winget install --id GitHub.cli --silent",
+            "macos": "brew install gh",
+            "linux": "sudo apt-get install -y gh || sudo dnf install -y gh || sudo yum install -y gh"
+          }
+        },
+        {
+          "id": "docker",
+          "name": "Docker Desktop",
+          "description": "Containerization platform",
+          "check": "docker --version",
+          "install": {
+            "windows": "winget install --id Docker.DockerDesktop --silent",
+            "macos": "brew install --cask docker",
+            "linux": "curl -fsSL https://get.docker.com | sh && sudo systemctl enable docker && sudo systemctl start docker"
+          }
+        },
+        {
+          "id": "vscode",
+          "name": "Visual Studio Code",
+          "description": "Code editor",
+          "check": "code --version",
+          "install": {
+            "windows": "winget install --id Microsoft.VisualStudioCode --silent",
+            "macos": "brew install --cask visual-studio-code",
+            "linux": "sudo snap install code --classic || sudo apt-get install -y code || sudo dnf install -y code"
+          }
+        },
+        {
+          "id": "python",
+          "name": "Python 3.12+",
+          "description": "Python programming language",
+          "check": "python --version || python3 --version",
+          "install": {
+            "windows": "winget install --id Python.Python.3.12 --silent",
+            "macos": "brew install python@3.12",
+            "linux": "sudo apt-get install -y python3.12 python3-pip || sudo dnf install -y python3.12 python3-pip"
+          }
+        },
+        {
+          "id": "nodejs",
+          "name": "Node.js",
+          "description": "JavaScript runtime",
+          "check": "node --version",
+          "install": {
+            "windows": "winget install --id OpenJS.NodeJS --silent",
+            "macos": "brew install node",
+            "linux": "curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - && sudo apt-get install -y nodejs || sudo dnf install -y nodejs"
+          }
+        },
+        {
+          "id": "golang",
+          "name": "Go",
+          "description": "Go programming language",
+          "check": "go version",
+          "install": {
+            "windows": "winget install --id GoLang.Go --silent",
+            "macos": "brew install go",
+            "linux": "sudo apt-get install -y golang || sudo dnf install -y golang || wget https://go.dev/dl/go1.21.5.linux-amd64.tar.gz && sudo tar -C /usr/local -xzf go1.21.5.linux-amd64.tar.gz"
+          }
+        },
+        {
+          "id": "postgresql",
+          "name": "PostgreSQL",
+          "description": "Relational database",
+          "check": "psql --version",
+          "install": {
+            "windows": "winget install --id PostgreSQL.PostgreSQL --silent",
+            "macos": "brew install postgresql@15",
+            "linux": "sudo apt-get install -y postgresql postgresql-contrib || sudo dnf install -y postgresql-server postgresql-contrib"
+          }
+        },
+        {
+          "id": "jq",
+          "name": "jq",
+          "description": "JSON processor",
+          "check": "jq --version",
+          "install": {
+            "windows": "winget install --id jqlang.jq --silent",
+            "macos": "brew install jq",
+            "linux": "sudo apt-get install -y jq || sudo dnf install -y jq"
+          }
+        },
+        {
+          "id": "curl",
+          "name": "curl",
+          "description": "Data transfer tool",
+          "check": "curl --version",
+          "install": {
+            "windows": "echo 'curl is built into Windows 10+'",
+            "macos": "echo 'curl is built into macOS'",
+            "linux": "sudo apt-get install -y curl || sudo dnf install -y curl"
+          }
+        }
+      ]
+    },
+    "ai": {
+      "name": "AI Development",
+      "description": "AI coding assistants and LLM frameworks",
+      "tools": [
+        {
+          "id": "ollama",
+          "name": "Ollama",
+          "description": "Run LLMs locally",
+          "check": "ollama --version",
+          "install": {
+            "windows": "winget install --id Ollama.Ollama --silent",
+            "macos": "brew install ollama",
+            "linux": "curl -fsSL https://ollama.com/install.sh | sh"
+          }
+        },
+        {
+          "id": "lmstudio",
+          "name": "LM Studio",
+          "description": "GUI for local LLMs",
+          "check": "echo 'Manual check required'",
+          "install": {
+            "windows": "winget install --id LMStudio.LMStudio --silent",
+            "macos": "brew install --cask lm-studio",
+            "linux": "echo 'Download from https://lmstudio.ai'"
+          }
+        },
+        {
+          "id": "cursor",
+          "name": "Cursor",
+          "description": "AI-first code editor",
+          "check": "cursor --version",
+          "install": {
+            "windows": "winget install --id Cursor.Cursor --silent",
+            "macos": "brew install --cask cursor",
+            "linux": "echo 'Download from https://cursor.sh'"
+          }
+        },
+        {
+          "id": "aider",
+          "name": "Aider",
+          "description": "AI pair programming",
+          "check": "aider --version",
+          "install": {
+            "windows": "pip install aider-chat",
+            "macos": "pip3 install aider-chat",
+            "linux": "pip3 install aider-chat"
+          }
+        },
+        {
+          "id": "openai-cli",
+          "name": "OpenAI CLI",
+          "description": "OpenAI API access",
+          "check": "openai --version",
+          "install": {
+            "windows": "pip install openai",
+            "macos": "pip3 install openai",
+            "linux": "pip3 install openai"
+          }
+        },
+        {
+          "id": "anthropic",
+          "name": "Anthropic Python SDK",
+          "description": "Claude API access",
+          "check": "python -c 'import anthropic' || python3 -c 'import anthropic'",
+          "install": {
+            "windows": "pip install anthropic",
+            "macos": "pip3 install anthropic",
+            "linux": "pip3 install anthropic"
+          }
+        },
+        {
+          "id": "langchain",
+          "name": "LangChain",
+          "description": "LLM application framework",
+          "check": "python -c 'import langchain' || python3 -c 'import langchain'",
+          "install": {
+            "windows": "pip install langchain langchain-openai langchain-anthropic",
+            "macos": "pip3 install langchain langchain-openai langchain-anthropic",
+            "linux": "pip3 install langchain langchain-openai langchain-anthropic"
+          }
+        },
+        {
+          "id": "llamaindex",
+          "name": "LlamaIndex",
+          "description": "Data framework for LLMs",
+          "check": "python -c 'import llama_index' || python3 -c 'import llama_index'",
+          "install": {
+            "windows": "pip install llama-index",
+            "macos": "pip3 install llama-index",
+            "linux": "pip3 install llama-index"
+          }
+        }
+      ]
+    },
+    "web": {
+      "name": "Web Development",
+      "description": "Frontend, backend, and API development tools",
+      "tools": [
+        {
+          "id": "postman",
+          "name": "Postman",
+          "description": "API testing platform",
+          "check": "echo 'Check manually'",
+          "install": {
+            "windows": "winget install --id Postman.Postman --silent",
+            "macos": "brew install --cask postman",
+            "linux": "sudo snap install postman"
+          }
+        },
+        {
+          "id": "insomnia",
+          "name": "Insomnia",
+          "description": "API client",
+          "check": "insomnia --version",
+          "install": {
+            "windows": "winget install --id Insomnia.Insomnia --silent",
+            "macos": "brew install --cask insomnia",
+            "linux": "sudo snap install insomnia"
+          }
+        },
+        {
+          "id": "bruno",
+          "name": "Bruno",
+          "description": "Open-source API client",
+          "check": "bruno --version",
+          "install": {
+            "windows": "winget install --id Bruno.Bruno --silent",
+            "macos": "brew install --cask bruno",
+            "linux": "sudo snap install bruno"
+          }
+        },
+        {
+          "id": "vite",
+          "name": "Vite",
+          "description": "Fast build tool",
+          "check": "vite --version",
+          "install": {
+            "windows": "npm install -g vite",
+            "macos": "npm install -g vite",
+            "linux": "npm install -g vite"
+          }
+        },
+        {
+          "id": "playwright",
+          "name": "Playwright",
+          "description": "Browser automation",
+          "check": "npx playwright --version",
+          "install": {
+            "windows": "npm install -g @playwright/test && npx playwright install",
+            "macos": "npm install -g @playwright/test && npx playwright install",
+            "linux": "npm install -g @playwright/test && npx playwright install"
+          }
+        },
+        {
+          "id": "cypress",
+          "name": "Cypress",
+          "description": "E2E testing",
+          "check": "cypress --version",
+          "install": {
+            "windows": "npm install -g cypress",
+            "macos": "npm install -g cypress",
+            "linux": "npm install -g cypress"
+          }
+        },
+        {
+          "id": "turbo",
+          "name": "Turbo",
+          "description": "Monorepo build system",
+          "check": "turbo --version",
+          "install": {
+            "windows": "npm install -g turbo",
+            "macos": "npm install -g turbo",
+            "linux": "npm install -g turbo"
+          }
+        }
+      ]
+    },
+    "data": {
+      "name": "Data Engineering & ML",
+      "description": "Databases, data science, and machine learning tools",
+      "tools": [
+        {
+          "id": "mongodb",
+          "name": "MongoDB",
+          "description": "NoSQL database",
+          "check": "mongod --version",
+          "install": {
+            "windows": "winget install --id MongoDB.Server --silent",
+            "macos": "brew tap mongodb/brew && brew install mongodb-community",
+            "linux": "wget -qO - https://www.mongodb.org/static/pgp/server-7.0.asc | sudo apt-key add - && echo 'deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse' | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list && sudo apt-get update && sudo apt-get install -y mongodb-org"
+          }
+        },
+        {
+          "id": "dbeaver",
+          "name": "DBeaver",
+          "description": "Universal database GUI",
+          "check": "echo 'Check manually'",
+          "install": {
+            "windows": "winget install --id dbeaver.dbeaver --silent",
+            "macos": "brew install --cask dbeaver-community",
+            "linux": "sudo snap install dbeaver-ce"
+          }
+        },
+        {
+          "id": "jupyter",
+          "name": "Jupyter",
+          "description": "Interactive notebooks",
+          "check": "jupyter --version",
+          "install": {
+            "windows": "pip install jupyter jupyterlab",
+            "macos": "pip3 install jupyter jupyterlab",
+            "linux": "pip3 install jupyter jupyterlab"
+          }
+        },
+        {
+          "id": "pandas",
+          "name": "pandas",
+          "description": "Data analysis library",
+          "check": "python -c 'import pandas' || python3 -c 'import pandas'",
+          "install": {
+            "windows": "pip install pandas numpy matplotlib",
+            "macos": "pip3 install pandas numpy matplotlib",
+            "linux": "pip3 install pandas numpy matplotlib"
+          }
+        },
+        {
+          "id": "duckdb",
+          "name": "DuckDB",
+          "description": "In-process analytical database",
+          "check": "duckdb --version",
+          "install": {
+            "windows": "winget install --id DuckDB.cli --silent",
+            "macos": "brew install duckdb",
+            "linux": "wget https://github.com/duckdb/duckdb/releases/download/v0.9.2/duckdb_cli-linux-amd64.zip && unzip duckdb_cli-linux-amd64.zip && sudo mv duckdb /usr/local/bin/"
+          }
+        }
+      ]
+    },
+    "automation": {
+      "name": "Workflow Automation",
+      "description": "Workflow engines and automation tools",
+      "tools": [
+        {
+          "id": "n8n",
+          "name": "n8n",
+          "description": "Workflow automation (self-hosted Zapier)",
+          "check": "n8n --version",
+          "install": {
+            "windows": "npm install -g n8n",
+            "macos": "npm install -g n8n",
+            "linux": "npm install -g n8n"
+          }
+        },
+        {
+          "id": "make",
+          "name": "Make",
+          "description": "Build automation tool",
+          "check": "make --version",
+          "install": {
+            "windows": "winget install --id GnuWin32.Make --silent",
+            "macos": "brew install make",
+            "linux": "sudo apt-get install -y make || sudo dnf install -y make"
+          }
+        },
+        {
+          "id": "just",
+          "name": "Just",
+          "description": "Command runner",
+          "check": "just --version",
+          "install": {
+            "windows": "cargo install just",
+            "macos": "brew install just",
+            "linux": "cargo install just"
+          }
+        },
+        {
+          "id": "airflow",
+          "name": "Apache Airflow",
+          "description": "Workflow orchestration",
+          "check": "airflow version",
+          "install": {
+            "windows": "pip install apache-airflow",
+            "macos": "pip3 install apache-airflow",
+            "linux": "pip3 install apache-airflow"
+          }
+        },
+        {
+          "id": "prefect",
+          "name": "Prefect",
+          "description": "Modern workflow orchestration",
+          "check": "prefect version",
+          "install": {
+            "windows": "pip install prefect",
+            "macos": "pip3 install prefect",
+            "linux": "pip3 install prefect"
+          }
+        }
+      ]
+    },
+    "devops": {
+      "name": "DevOps & Infrastructure",
+      "description": "Cloud, containers, and infrastructure tools",
+      "tools": [
+        {
+          "id": "terraform",
+          "name": "Terraform",
+          "description": "Infrastructure as code",
+          "check": "terraform --version",
+          "install": {
+            "windows": "winget install --id Hashicorp.Terraform --silent",
+            "macos": "brew install terraform",
+            "linux": "wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg && echo 'deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main' | sudo tee /etc/apt/sources.list.d/hashicorp.list && sudo apt update && sudo apt-get install -y terraform"
+          }
+        },
+        {
+          "id": "kubectl",
+          "name": "kubectl",
+          "description": "Kubernetes CLI",
+          "check": "kubectl version --client",
+          "install": {
+            "windows": "winget install --id Kubernetes.kubectl --silent",
+            "macos": "brew install kubectl",
+            "linux": "curl -LO 'https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl' && sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl"
+          }
+        },
+        {
+          "id": "helm",
+          "name": "Helm",
+          "description": "Kubernetes package manager",
+          "check": "helm version",
+          "install": {
+            "windows": "winget install --id Helm.Helm --silent",
+            "macos": "brew install helm",
+            "linux": "curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash"
+          }
+        },
+        {
+          "id": "k9s",
+          "name": "K9s",
+          "description": "Kubernetes CLI UI",
+          "check": "k9s version",
+          "install": {
+            "windows": "winget install --id Derailed.k9s --silent",
+            "macos": "brew install k9s",
+            "linux": "curl -sS https://webinstall.dev/k9s | bash"
+          }
+        },
+        {
+          "id": "awscli",
+          "name": "AWS CLI",
+          "description": "Amazon Web Services CLI",
+          "check": "aws --version",
+          "install": {
+            "windows": "winget install --id Amazon.AWSCLI --silent",
+            "macos": "brew install awscli",
+            "linux": "curl 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip' -o 'awscliv2.zip' && unzip awscliv2.zip && sudo ./aws/install"
+          }
+        },
+        {
+          "id": "gcloud",
+          "name": "Google Cloud SDK",
+          "description": "Google Cloud CLI",
+          "check": "gcloud --version",
+          "install": {
+            "windows": "winget install --id Google.CloudSDK --silent",
+            "macos": "brew install --cask google-cloud-sdk",
+            "linux": "curl https://sdk.cloud.google.com | bash && exec -l $SHELL"
+          }
+        },
+        {
+          "id": "ngrok",
+          "name": "ngrok",
+          "description": "Tunneling for local dev",
+          "check": "ngrok version",
+          "install": {
+            "windows": "winget install --id Ngrok.Ngrok --silent",
+            "macos": "brew install ngrok/ngrok/ngrok",
+            "linux": "curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo 'deb https://ngrok-agent.s3.amazonaws.com buster main' | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok"
+          }
+        }
+      ]
+    },
+    "testing": {
+      "name": "Testing & QA",
+      "description": "Testing frameworks and performance tools",
+      "tools": [
+        {
+          "id": "pytest",
+          "name": "pytest",
+          "description": "Python testing framework",
+          "check": "pytest --version",
+          "install": {
+            "windows": "pip install pytest pytest-cov",
+            "macos": "pip3 install pytest pytest-cov",
+            "linux": "pip3 install pytest pytest-cov"
+          }
+        },
+        {
+          "id": "k6",
+          "name": "K6",
+          "description": "Load testing tool",
+          "check": "k6 version",
+          "install": {
+            "windows": "winget install --id k6.k6 --silent",
+            "macos": "brew install k6",
+            "linux": "sudo gpg -k && sudo gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69 && echo 'deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main' | sudo tee /etc/apt/sources.list.d/k6.list && sudo apt-get update && sudo apt-get install k6"
+          }
+        },
+        {
+          "id": "selenium",
+          "name": "Selenium",
+          "description": "Browser automation",
+          "check": "python -c 'import selenium' || python3 -c 'import selenium'",
+          "install": {
+            "windows": "pip install selenium",
+            "macos": "pip3 install selenium",
+            "linux": "pip3 install selenium"
+          }
+        }
+      ]
+    },
+    "security": {
+      "name": "Security Tools",
+      "description": "Security, secrets management, and scanning",
+      "tools": [
+        {
+          "id": "1password-cli",
+          "name": "1Password CLI",
+          "description": "1Password command-line",
+          "check": "op --version",
+          "install": {
+            "windows": "winget install --id AgileBits.1PasswordCLI --silent",
+            "macos": "brew install --cask 1password-cli",
+            "linux": "curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg && echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/amd64 stable main' | sudo tee /etc/apt/sources.list.d/1password.list && sudo apt update && sudo apt install 1password-cli"
+          }
+        },
+        {
+          "id": "vault",
+          "name": "HashiCorp Vault",
+          "description": "Secrets management",
+          "check": "vault --version",
+          "install": {
+            "windows": "winget install --id Hashicorp.Vault --silent",
+            "macos": "brew install vault",
+            "linux": "wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg && echo 'deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main' | sudo tee /etc/apt/sources.list.d/hashicorp.list && sudo apt update && sudo apt-get install vault"
+          }
+        },
+        {
+          "id": "trivy",
+          "name": "Trivy",
+          "description": "Vulnerability scanner",
+          "check": "trivy --version",
+          "install": {
+            "windows": "winget install --id Aqua.Trivy --silent",
+            "macos": "brew install trivy",
+            "linux": "sudo apt-get install wget apt-transport-https gnupg lsb-release && wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null && echo 'deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main' | sudo tee -a /etc/apt/sources.list.d/trivy.list && sudo apt-get update && sudo apt-get install trivy"
+          }
+        }
+      ]
+    },
+    "design": {
+      "name": "Design & Media",
+      "description": "UI/UX design and media processing tools",
+      "tools": [
+        {
+          "id": "figma",
+          "name": "Figma",
+          "description": "Design tool",
+          "check": "echo 'Check manually'",
+          "install": {
+            "windows": "winget install --id Figma.Figma --silent",
+            "macos": "brew install --cask figma",
+            "linux": "echo 'Use web version at https://figma.com'"
+          }
+        },
+        {
+          "id": "ffmpeg",
+          "name": "FFmpeg",
+          "description": "Video/audio processing",
+          "check": "ffmpeg -version",
+          "install": {
+            "windows": "winget install --id Gyan.FFmpeg --silent",
+            "macos": "brew install ffmpeg",
+            "linux": "sudo apt-get install -y ffmpeg || sudo dnf install -y ffmpeg"
+          }
+        },
+        {
+          "id": "imagemagick",
+          "name": "ImageMagick",
+          "description": "Image processing",
+          "check": "convert --version",
+          "install": {
+            "windows": "winget install --id ImageMagick.ImageMagick --silent",
+            "macos": "brew install imagemagick",
+            "linux": "sudo apt-get install -y imagemagick || sudo dnf install -y imagemagick"
+          }
+        }
+      ]
+    },
+    "gamedev": {
+      "name": "Game Development",
+      "description": "Game engines and 3D tools",
+      "tools": [
+        {
+          "id": "unity",
+          "name": "Unity Hub",
+          "description": "Unity game engine",
+          "check": "echo 'Check manually'",
+          "install": {
+            "windows": "winget install --id Unity.UnityHub --silent",
+            "macos": "brew install --cask unity-hub",
+            "linux": "echo 'Download from https://unity.com/download'"
+          }
+        },
+        {
+          "id": "godot",
+          "name": "Godot",
+          "description": "Open-source game engine",
+          "check": "godot --version",
+          "install": {
+            "windows": "winget install --id GodotEngine.Godot --silent",
+            "macos": "brew install --cask godot",
+            "linux": "sudo snap install godot"
+          }
+        },
+        {
+          "id": "blender",
+          "name": "Blender",
+          "description": "3D modeling and animation",
+          "check": "blender --version",
+          "install": {
+            "windows": "winget install --id BlenderFoundation.Blender --silent",
+            "macos": "brew install --cask blender",
+            "linux": "sudo snap install blender --classic"
+          }
+        }
+      ]
+    }
+  }
+}
