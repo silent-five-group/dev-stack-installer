@@ -87,7 +87,7 @@
           "description": "Relational database",
           "check": "psql --version",
           "install": {
-            "windows": "winget install --id PostgreSQL.PostgreSQL --silent",
+            "windows": "winget install --id PostgreSQL.PostgreSQL.{LATEST} --silent",
             "macos": "brew install postgresql@15",
             "linux": "sudo apt-get install -y postgresql postgresql-contrib || sudo dnf install -y postgresql-server postgresql-contrib"
           }
