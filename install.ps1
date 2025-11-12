@@ -123,6 +123,54 @@ try {
     exit 1
 }
 
+# Function to resolve version placeholders in package IDs
+function Resolve-PackageVersion {
+    param($PackageId)
+
+    # Check if package ID contains {LATEST} placeholder
+    if ($PackageId -notmatch '\{LATEST\}') {
+        return $PackageId
+    }
+
+    # Extract base package pattern (e.g., "PostgreSQL.PostgreSQL.{LATEST}" -> "PostgreSQL.PostgreSQL.")
+    $basePattern = $PackageId -replace '\{LATEST\}', ''
+
+    Write-Info "  Detecting latest version for $basePattern..."
+
+    try {
+        # Search for all versions of this package
+        $searchResults = winget search "$basePattern" --accept-source-agreements 2>&1 | Out-String
+
+        # Escape dots for regex matching
+        $escapedPattern = [regex]::Escape($basePattern)
+
+        # Extract version numbers from package IDs
+        $versions = $searchResults -split "`n" |
+            Where-Object { $_ -match "$escapedPattern(\d+)" } |
+            ForEach-Object {
+                if ($_ -match "$escapedPattern(\d+)") {
+                    [PSCustomObject]@{
+                        Version = [int]$Matches[1]
+                        FullId = "$basePattern$($Matches[1])"
+                    }
+                }
+            } |
+            Sort-Object Version -Descending
+
+        if ($versions.Count -gt 0) {
+            $latestId = $versions[0].FullId
+            Write-Info "  Found latest: $latestId (v$($versions[0].Version))"
+            return $latestId
+        } else {
+            Write-Warning "  Could not detect version, using pattern as-is"
+            return $PackageId -replace '\{LATEST\}', ''
+        }
+    } catch {
+        Write-Warning "  Version detection failed: $($_.Exception.Message)"
+        return $PackageId -replace '\{LATEST\}', ''
+    }
+}
+
 # Function to check if tool is installed
 function Test-ToolInstalled {
     param($CheckCommand)
@@ -163,12 +211,23 @@ function Install-Tool {
         return $true
     }
 
+    # Resolve version placeholders in winget commands (do this before dry-run check)
+    if ($installCmd -like "winget*" -and $installCmd -match '\{LATEST\}') {
+        # Extract package ID from command
+        if ($installCmd -match '--id\s+([^\s]+)') {
+            $packageId = $Matches[1]
+            $resolvedId = Resolve-PackageVersion -PackageId $packageId
+            $installCmd = $installCmd -replace [regex]::Escape($packageId), $resolvedId
+        }
+    }
+
     if ($DryRun) {
         Write-Info "$($Tool.name): Would install with: $installCmd"
         return $true
     }
 
     Write-Info "$($Tool.name): Installing..."
+
     "$($Tool.name): $installCmd" | Out-File $LogFile -Append
 
     try {
